@@ -35,6 +35,7 @@ namespace FirstHomeWork.Models
         [StringLength(250, ErrorMessage="欄位長度不得大於 250 個字元")]
         public string Email { get; set; }
         [Required]
+        [Display(Name ="作廢")]
         public bool IsDeleted { get; set; }
     
         public virtual ICollection<客戶銀行資訊> 客戶銀行資訊 { get; set; }

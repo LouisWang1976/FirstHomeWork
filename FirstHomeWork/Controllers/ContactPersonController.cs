@@ -114,8 +114,8 @@ namespace FirstHomeWork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            客戶聯絡人 客戶聯絡人 = db.客戶聯絡人.Find(id);
-            db.客戶聯絡人.Remove(客戶聯絡人);
+            客戶聯絡人 l_ContactPerson = db.客戶聯絡人.Find(id);
+            l_ContactPerson.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
