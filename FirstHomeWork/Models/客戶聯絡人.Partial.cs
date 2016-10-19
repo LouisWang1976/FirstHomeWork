@@ -3,12 +3,27 @@ namespace FirstHomeWork.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+    using System.Linq;
+
     [MetadataType(typeof(客戶聯絡人MetaData))]
-    public partial class 客戶聯絡人
+    public partial class 客戶聯絡人 : IValidatableObject
     {
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            CustomerEntities db = new CustomerEntities();
+            客戶聯絡人 l_email =db.客戶聯絡人
+                .Where(p=>p.Email==Email )
+                .Where(p => p.客戶Id != 客戶Id)
+                .FirstOrDefault();
+            if (l_email!=null)
+            {
+                yield return new ValidationResult("email不能與其他人重複",
+                    new string[] { "email" });
+            }
+            throw new NotImplementedException();
+        }
     }
-    
+
     public partial class 客戶聯絡人MetaData
     {
         [Required]
