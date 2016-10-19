@@ -18,6 +18,7 @@ namespace FirstHomeWork.Controllers
         public ActionResult Index()
         {
             var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料);
+            客戶聯絡人 = 客戶聯絡人.Where(p => p.IsDeleted == false);
             return View(客戶聯絡人.ToList());
         }
 

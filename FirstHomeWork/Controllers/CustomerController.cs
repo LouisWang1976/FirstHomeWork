@@ -17,6 +17,7 @@ namespace FirstHomeWork.Controllers
         // GET: Customer
         public ActionResult Index()
         {
+            var 客戶資料 = db.客戶資料.Where(p => p.IsDeleted == false);
             return View(db.客戶資料.ToList());
         }
 

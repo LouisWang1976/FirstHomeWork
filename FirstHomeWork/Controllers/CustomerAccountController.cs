@@ -18,6 +18,7 @@ namespace FirstHomeWork.Controllers
         public ActionResult Index()
         {
             var 客戶銀行資訊 = db.客戶銀行資訊.Include(客 => 客.客戶資料);
+            客戶銀行資訊 = 客戶銀行資訊.Where(p => p.IsDeleted == false);
             return View(客戶銀行資訊.ToList());
         }
 
