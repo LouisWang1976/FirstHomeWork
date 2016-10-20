@@ -11,6 +11,7 @@
         <EntityTypeShape EntityType="CustomerModel.客戶聯絡人" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <AssociationConnector Association="CustomerModel.FK_客戶銀行資訊_客戶資料" ManuallyRouted="false" />
         <AssociationConnector Association="CustomerModel.FK_客戶聯絡人_客戶資料" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CustomerModel.vw_CustomerDetailsCount" Width="1.5" PointX="5.375" PointY="3.75" FillColor="Green" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

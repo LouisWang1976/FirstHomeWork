@@ -1,0 +1,34 @@
+﻿@model FirstHomeWork.Models.vw_CustomerDetailsCount
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>vw_CustomerDetailsCount</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CountAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountAccount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountContact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountContact)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("回列表", "Index")
+</p>

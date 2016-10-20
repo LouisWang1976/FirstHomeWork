@@ -203,6 +203,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\vw_CustomerDetailsCountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -246,6 +247,9 @@
     </Compile>
     <Compile Include="Models\sysdiagrams.Partial.cs">
       <DependentUpon>EFGeneratePartialClass.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_CustomerDetailsCount.cs">
+      <DependentUpon>Customer.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\客戶聯絡人.cs">
       <DependentUpon>Customer.tt</DependentUpon>
@@ -364,6 +368,11 @@
     <Content Include="Views\ContactPerson\Details.cshtml" />
     <Content Include="Views\ContactPerson\Edit.cshtml" />
     <Content Include="Views\ContactPerson\Index.cshtml" />
+    <Content Include="Views\vw_CustomerDetailsCount\Create.cshtml" />
+    <Content Include="Views\vw_CustomerDetailsCount\Delete.cshtml" />
+    <Content Include="Views\vw_CustomerDetailsCount\Details.cshtml" />
+    <Content Include="Views\vw_CustomerDetailsCount\Edit.cshtml" />
+    <Content Include="Views\vw_CustomerDetailsCount\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

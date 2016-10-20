@@ -1,0 +1,40 @@
+﻿@model FirstHomeWork.Models.vw_CustomerDetailsCount
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>vw_CustomerDetailsCount</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CountAccount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountAccount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountContact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountContact)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("回列表", "Index")
+        </div>
+    }
+</div>

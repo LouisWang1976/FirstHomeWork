@@ -1,0 +1,41 @@
+﻿@model IEnumerable<FirstHomeWork.Models.vw_CustomerDetailsCount>
+
+@{
+    ViewBag.Title = "客戶細部資料統計";
+}
+
+<h2>客戶細部資料統計</h2>
+
+<p>
+    @Html.ActionLink("回客戶資料", "Index", "Customer")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountAccount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountContact)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CountAccount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CountContact)
+        </td>
+
+    </tr>
+}
+
+</table>
