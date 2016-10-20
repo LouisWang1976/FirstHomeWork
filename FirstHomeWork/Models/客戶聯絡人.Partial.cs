@@ -20,7 +20,7 @@ namespace FirstHomeWork.Models
                 yield return new ValidationResult("email不能與其他人重複",
                     new string[] { "email" });
             }
-            throw new NotImplementedException();
+            yield break;
         }
     }
 

@@ -15,11 +15,15 @@ namespace FirstHomeWork.Controllers
         private CustomerEntities db = new CustomerEntities();
 
         // GET: CustomerAccount
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
-            var 客戶銀行資訊 = db.客戶銀行資訊.Include(客 => 客.客戶資料);
-            客戶銀行資訊 = 客戶銀行資訊.Where(p => p.IsDeleted == false);
-            return View(客戶銀行資訊.ToList());
+            var IQAccount = db.客戶銀行資訊.Include(客 => 客.客戶資料);
+            IQAccount = IQAccount.Where(p => p.IsDeleted == false);
+            if (!string.IsNullOrEmpty(search))
+            {
+                IQAccount = IQAccount.Where(p => p.帳戶名稱.Contains(search));
+            }
+            return View(IQAccount.ToList());
         }
 
         // GET: CustomerAccount/Details/5

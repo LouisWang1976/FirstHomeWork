@@ -1,14 +1,18 @@
 ﻿@model IEnumerable<FirstHomeWork.Models.客戶聯絡人>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "客戶聯絡人";
 }
 
-<h2>Index</h2>
+<h2>客戶聯絡人</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新增", "Create")
 </p>
+<form>
+    <input type="text" name="search" />
+    <input type="submit" name="submit" value="搜尋" />
+</form>
 <table class="table">
     <tr>
         <th>

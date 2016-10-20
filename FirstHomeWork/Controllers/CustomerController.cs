@@ -15,10 +15,14 @@ namespace FirstHomeWork.Controllers
         private CustomerEntities db = new CustomerEntities();
 
         // GET: Customer
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
-            var 客戶資料 = db.客戶資料.Where(p => p.IsDeleted == false);
-            return View(db.客戶資料.ToList());
+            var IQCustpmers = db.客戶資料.Where(p => p.IsDeleted == false);
+            if (!string.IsNullOrEmpty(search))
+            {
+                IQCustpmers = IQCustpmers.Where(p => p.客戶名稱.Contains(search));
+            }
+            return View(IQCustpmers.ToList());
         }
 
         // GET: Customer/Details/5
