@@ -13,7 +13,7 @@ namespace FirstHomeWork.Models
             CustomerEntities db = new CustomerEntities();
             客戶聯絡人 l_email =db.客戶聯絡人
                 .Where(p=>p.Email==Email )
-                .Where(p => p.客戶Id != 客戶Id)
+                .Where(p => p.Id != Id)
                 .FirstOrDefault();
             if (l_email!=null)
             {
