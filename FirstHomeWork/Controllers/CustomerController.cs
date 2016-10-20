@@ -114,7 +114,24 @@ namespace FirstHomeWork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            
             客戶資料 l_Customer = db.客戶資料.Find(id);
+            var l_ListContact = db.客戶聯絡人.Where(p => p.客戶Id == l_Customer.Id).ToList();
+            if(l_ListContact!=null)
+            {
+                foreach(客戶聯絡人 t_Contact in l_ListContact)
+                {
+                    t_Contact.IsDeleted = true;
+                }
+            }
+            var l_ListAccount = db.客戶銀行資訊.Where(p => p.客戶Id == l_Customer.Id).ToList();
+            if (l_ListAccount != null)
+            {
+                foreach (客戶銀行資訊 t_Account in l_ListAccount)
+                {
+                    t_Account.IsDeleted = true;
+                }
+            }
             l_Customer.IsDeleted=true;
             db.SaveChanges();
             return RedirectToAction("Index");
