@@ -30,6 +30,24 @@ namespace FirstHomeWork.Models
         }
         public override void Delete(客戶資料 entity)
         {
+            客戶聯絡人Repository ContactRepo = RepositoryHelper.Get客戶聯絡人Repository();
+            var l_ListContact = ContactRepo.All().Where(p => p.客戶Id == entity.Id).ToList();
+            if (l_ListContact != null)
+            {
+                foreach (客戶聯絡人 t_Contact in l_ListContact)
+                {
+                    t_Contact.IsDeleted = true;
+                }
+            }
+            客戶銀行資訊Repository AccountRepo = RepositoryHelper.Get客戶銀行資訊Repository();
+            var l_ListAccount = AccountRepo.Where(p => p.客戶Id == entity.Id).ToList();
+            if (l_ListAccount != null)
+            {
+                foreach (客戶銀行資訊 t_Account in l_ListAccount)
+                {
+                    t_Account.IsDeleted = true;
+                }
+            }
             entity.IsDeleted = true;
         }
     }

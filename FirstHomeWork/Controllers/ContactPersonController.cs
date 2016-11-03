@@ -59,8 +59,8 @@ namespace FirstHomeWork.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.客戶聯絡人.Add(客戶聯絡人);
-                db.SaveChanges();
+                repo.Add(客戶聯絡人);
+                repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -93,8 +93,9 @@ namespace FirstHomeWork.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(客戶聯絡人).State = EntityState.Modified;
-                db.SaveChanges();
+                var dbcontext = repo.UnitOfWork.Context;
+                dbcontext.Entry(客戶聯絡人).State = EntityState.Modified;
+                dbcontext.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.客戶Id = new SelectList(db.客戶資料, "Id", "客戶名稱", 客戶聯絡人.客戶Id);
@@ -122,8 +123,8 @@ namespace FirstHomeWork.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             客戶聯絡人 l_ContactPerson = repo.Find(id);
-            l_ContactPerson.IsDeleted = true;
-            db.SaveChanges();
+            repo.Delete(l_ContactPerson);
+            repo.UnitOfWork.Commit();
             return RedirectToAction("Index");
         }
 

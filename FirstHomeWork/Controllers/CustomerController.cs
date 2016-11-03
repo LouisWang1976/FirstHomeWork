@@ -59,8 +59,8 @@ namespace FirstHomeWork.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.客戶資料.Add(客戶資料);
-                db.SaveChanges();
+                repo.Add(客戶資料);
+                repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
 
@@ -91,8 +91,9 @@ namespace FirstHomeWork.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(客戶資料).State = EntityState.Modified;
-                db.SaveChanges();
+                var dbcontext = repo.UnitOfWork.Context;
+                dbcontext.Entry(客戶資料).State = EntityState.Modified;
+                dbcontext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(客戶資料);
@@ -120,24 +121,8 @@ namespace FirstHomeWork.Controllers
         {
             
             客戶資料 l_Customer = repo.Find(id);
-            var l_ListContact = db.客戶聯絡人.Where(p => p.客戶Id == l_Customer.Id).ToList();
-            if(l_ListContact!=null)
-            {
-                foreach(客戶聯絡人 t_Contact in l_ListContact)
-                {
-                    t_Contact.IsDeleted = true;
-                }
-            }
-            var l_ListAccount = db.客戶銀行資訊.Where(p => p.客戶Id == l_Customer.Id).ToList();
-            if (l_ListAccount != null)
-            {
-                foreach (客戶銀行資訊 t_Account in l_ListAccount)
-                {
-                    t_Account.IsDeleted = true;
-                }
-            }
-            l_Customer.IsDeleted=true;
-            db.SaveChanges();
+            repo.Delete(l_Customer);
+            repo.UnitOfWork.Commit();
             return RedirectToAction("Index");
         }
 
