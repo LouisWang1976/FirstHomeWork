@@ -7,23 +7,26 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FirstHomeWork.Models;
-
+using PagedList;
 namespace FirstHomeWork.Controllers
 {
     public class ContactPersonController : Controller
     {
         private CustomerEntities db = new CustomerEntities();
-
+        private int pageSize = 10;
         // GET: ContactPerson
-        public ActionResult Index(string search)
+        public ActionResult Index(string search,int page=1)
         {
+            int currentPage = page < 1 ? 1 : page;
             var IQContact = db.客戶聯絡人.Include(客 => 客.客戶資料);
             IQContact = IQContact.Where(p => p.IsDeleted == false);
             if (!string.IsNullOrEmpty(search))
             {
                 IQContact = IQContact.Where(p => p.姓名.Contains(search));
-            }           
-            return View(IQContact.ToList());
+            }
+            IQContact=IQContact.OrderByDescending(p => p.Id);
+            var result = IQContact.ToPagedList(currentPage, pageSize);
+            return View(result);
         }
 
         // GET: ContactPerson/Details/5
