@@ -7,17 +7,23 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FirstHomeWork.Models;
+using PagedList;
 
 namespace FirstHomeWork.Controllers
 {
     public class vw_CustomerDetailsCountController : Controller
     {
         private CustomerEntities db = new CustomerEntities();
-
+        private int pageSize = 10;
         // GET: vw_CustomerDetailsCount
-        public ActionResult Index()
+        public ActionResult Index(int page=1)
         {
-            return View(db.vw_CustomerDetailsCount.ToList());
+            int currentPage = page < 1 ? 1 : page;
+            var DbsetCustomerDetailsCount = db.vw_CustomerDetailsCount;
+          
+            IQueryable<vw_CustomerDetailsCount> IQCustomerDetailsCount = DbsetCustomerDetailsCount.OrderByDescending(p => p.CustomerID);
+            var result = IQCustomerDetailsCount.ToPagedList(currentPage, pageSize);
+            return View(result);
         }
 
         // GET: vw_CustomerDetailsCount/Details/5

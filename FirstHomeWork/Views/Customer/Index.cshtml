@@ -1,9 +1,9 @@
-﻿@model IEnumerable<FirstHomeWork.Models.客戶資料>
+﻿@model IPagedList<FirstHomeWork.Models.客戶資料>
 
 @{
-    ViewBag.Title = "客戶資料";
+    ViewBag.Title = "客戶細部資料表";
 }
-
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <h2>客戶資料</h2>
 
 <p>
@@ -19,22 +19,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.客戶名稱)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().客戶名稱)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.統一編號)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().統一編號)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.電話)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().電話)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.傳真)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().傳真)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.地址)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().地址)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
         </th>
         <th></th>
     </tr>
@@ -68,3 +68,4 @@
 }
 
 </table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))

@@ -1,9 +1,9 @@
-﻿@model IEnumerable<FirstHomeWork.Models.vw_CustomerDetailsCount>
+﻿@model IPagedList<FirstHomeWork.Models.vw_CustomerDetailsCount>
 
 @{
     ViewBag.Title = "客戶細部資料統計";
 }
-
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <h2>客戶細部資料統計</h2>
 
 <p>
@@ -12,13 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Customer)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Customer)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CountAccount)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CountAccount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CountContact)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().CountContact)
         </th>
         <th></th>
     </tr>
@@ -39,3 +39,4 @@
 }
 
 </table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
