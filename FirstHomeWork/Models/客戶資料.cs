@@ -29,6 +29,9 @@ namespace FirstHomeWork.Models
         public string 地址 { get; set; }
         public string Email { get; set; }
         public bool IsDeleted { get; set; }
+        public Nullable<int> Classification { get; set; }
+        public string Account { get; set; }
+        public byte[] PassWord { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<客戶銀行資訊> 客戶銀行資訊 { get; set; }

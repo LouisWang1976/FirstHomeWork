@@ -12,11 +12,9 @@ namespace FirstHomeWork.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class vw_CustomerDetailsCount
+    public partial class 客戶分類
     {
-        public int CustomerID { get; set; }
-        public string Customer { get; set; }
-        public Nullable<int> CountAccount { get; set; }
-        public Nullable<int> CountContact { get; set; }
+        public int Id { get; set; }
+        public string ClassName { get; set; }
     }
 }
