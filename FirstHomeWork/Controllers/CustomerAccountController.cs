@@ -13,20 +13,15 @@ namespace FirstHomeWork.Controllers
 {
     public class CustomerAccountController : Controller
     {
+        客戶銀行資訊Repository repo = RepositoryHelper.Get客戶銀行資訊Repository();
         private CustomerEntities db = new CustomerEntities();
         private int pageSize = 10;
         // GET: CustomerAccount
         public ActionResult Index(string search, int page = 1)
         {
             int currentPage = page < 1 ? 1 : page;
-            var IQAccount = db.客戶銀行資訊.Include(客 => 客.客戶資料);
-            IQAccount = IQAccount.Where(p => p.IsDeleted == false);
-            if (!string.IsNullOrEmpty(search))
-            {
-                IQAccount = IQAccount.Where(p => p.帳戶名稱.Contains(search));
-            }
-            IQAccount = IQAccount.OrderByDescending(p => p.Id);
-            var result = IQAccount.ToPagedList(currentPage, pageSize);
+            var data = repo.GetAllDataOrderById(search, page);
+            var result = data.ToPagedList(currentPage, pageSize);
             return View(result);
         }
 
@@ -37,7 +32,7 @@ namespace FirstHomeWork.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶銀行資訊 客戶銀行資訊 = db.客戶銀行資訊.Find(id);
+            客戶銀行資訊 客戶銀行資訊 = repo.Find(id.Value);
             if (客戶銀行資訊 == null)
             {
                 return HttpNotFound();
@@ -77,7 +72,7 @@ namespace FirstHomeWork.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶銀行資訊 客戶銀行資訊 = db.客戶銀行資訊.Find(id);
+            客戶銀行資訊 客戶銀行資訊 = repo.Find(id.Value);
             if (客戶銀行資訊 == null)
             {
                 return HttpNotFound();
@@ -110,7 +105,7 @@ namespace FirstHomeWork.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶銀行資訊 客戶銀行資訊 = db.客戶銀行資訊.Find(id);
+            客戶銀行資訊 客戶銀行資訊 = repo.Find(id.Value);
             if (客戶銀行資訊 == null)
             {
                 return HttpNotFound();
@@ -123,7 +118,7 @@ namespace FirstHomeWork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            客戶銀行資訊 l_CustomerAccount = db.客戶銀行資訊.Find(id);
+            客戶銀行資訊 l_CustomerAccount = repo.Find(id);
             l_CustomerAccount.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");

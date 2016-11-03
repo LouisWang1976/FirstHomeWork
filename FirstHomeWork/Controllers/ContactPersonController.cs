@@ -12,6 +12,7 @@ namespace FirstHomeWork.Controllers
 {
     public class ContactPersonController : Controller
     {
+        客戶聯絡人Repository repo = RepositoryHelper.Get客戶聯絡人Repository();
         private CustomerEntities db = new CustomerEntities();
         private int pageSize = 10;
         // GET: ContactPerson
@@ -20,15 +21,9 @@ namespace FirstHomeWork.Controllers
             int currentPage = page < 1 ? 1 : page;
             var IQContact = db.客戶聯絡人.Include(客 => 客.客戶資料);
             IQContact = IQContact.Where(p => p.IsDeleted == false);
-            if (!string.IsNullOrEmpty(search1))
-            {
-                IQContact = IQContact.Where(p => p.姓名.Contains(search1));
-            }
-            if (!string.IsNullOrEmpty(search2))
-            {
-                IQContact = IQContact.Where(p => p.職稱.Contains(search2));
-            }
+
             IQContact =IQContact.OrderByDescending(p => p.Id);
+            var data = repo.GetAllDataOrderById(search1, search2, page);
             var result = IQContact.ToPagedList(currentPage, pageSize);
             return View(result);
         }
@@ -40,7 +35,7 @@ namespace FirstHomeWork.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶聯絡人 客戶聯絡人 = db.客戶聯絡人.Find(id);
+            客戶聯絡人 客戶聯絡人 =repo.Find(id.Value);
             if (客戶聯絡人 == null)
             {
                 return HttpNotFound();
@@ -80,7 +75,7 @@ namespace FirstHomeWork.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶聯絡人 客戶聯絡人 = db.客戶聯絡人.Find(id);
+            客戶聯絡人 客戶聯絡人 = repo.Find(id.Value);
             if (客戶聯絡人 == null)
             {
                 return HttpNotFound();
@@ -113,7 +108,7 @@ namespace FirstHomeWork.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶聯絡人 客戶聯絡人 = db.客戶聯絡人.Find(id);
+            客戶聯絡人 客戶聯絡人 = repo.Find(id.Value);
             if (客戶聯絡人 == null)
             {
                 return HttpNotFound();
@@ -126,7 +121,7 @@ namespace FirstHomeWork.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            客戶聯絡人 l_ContactPerson = db.客戶聯絡人.Find(id);
+            客戶聯絡人 l_ContactPerson = repo.Find(id);
             l_ContactPerson.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");

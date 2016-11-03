@@ -13,27 +13,19 @@ namespace FirstHomeWork.Controllers
 {
     public class CustomerController : Controller
     {
+        客戶資料Repository repo = RepositoryHelper.Get客戶資料Repository();
+        客戶分類Repository ClassRepo = RepositoryHelper.Get客戶分類Repository();
         private CustomerEntities db = new CustomerEntities();
         private int pageSize = 10;
         // GET: Customer
         public ActionResult Index(string search1,int? DPClass, int page = 1)
         {
-            var options = (from s1 in db.客戶分類 select new { s1.Id, s1.ClassName }).ToList();
+            var options = ClassRepo.All().ToList();
             ViewBag.DPClass = new SelectList(options,"Id", "ClassName");
 
             int currentPage = page < 1 ? 1 : page;
-            var IQContact = db.客戶聯絡人.Include(客 => 客.客戶資料);
-            var IQCustpmers = db.客戶資料.Where(p => p.IsDeleted == false);
-            if (!string.IsNullOrEmpty(search1))
-            {
-                IQCustpmers = IQCustpmers.Where(p => p.客戶名稱.Contains(search1));
-            }
-            if (DPClass.HasValue)
-            {
-                IQCustpmers = IQCustpmers.Where(p => p.Classification== DPClass);
-             }
-            IQCustpmers = IQCustpmers.OrderByDescending(p => p.Id);
-            var result = IQCustpmers.ToPagedList(currentPage, pageSize);
+            var data = repo.GetAllDataOrderById(search1, DPClass,  page);
+            var result = data.ToPagedList(currentPage, pageSize);
             return View(result);
         }
 
@@ -44,7 +36,7 @@ namespace FirstHomeWork.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = db.客戶資料.Find(id);
+            客戶資料 客戶資料 = repo.Find(id.Value);
             if (客戶資料 == null)
             {
                 return HttpNotFound();
@@ -82,7 +74,7 @@ namespace FirstHomeWork.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = db.客戶資料.Find(id);
+            客戶資料 客戶資料 = repo.Find(id.Value);
             if (客戶資料 == null)
             {
                 return HttpNotFound();
@@ -113,7 +105,7 @@ namespace FirstHomeWork.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            客戶資料 客戶資料 = db.客戶資料.Find(id);
+            客戶資料 客戶資料 = repo.Find(id.Value);
             if (客戶資料 == null)
             {
                 return HttpNotFound();
@@ -127,7 +119,7 @@ namespace FirstHomeWork.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             
-            客戶資料 l_Customer = db.客戶資料.Find(id);
+            客戶資料 l_Customer = repo.Find(id);
             var l_ListContact = db.客戶聯絡人.Where(p => p.客戶Id == l_Customer.Id).ToList();
             if(l_ListContact!=null)
             {
