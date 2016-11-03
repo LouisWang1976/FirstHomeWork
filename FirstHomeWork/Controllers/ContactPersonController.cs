@@ -15,16 +15,20 @@ namespace FirstHomeWork.Controllers
         private CustomerEntities db = new CustomerEntities();
         private int pageSize = 10;
         // GET: ContactPerson
-        public ActionResult Index(string search,int page=1)
+        public ActionResult Index(string search1, string search2,int page=1)
         {
             int currentPage = page < 1 ? 1 : page;
             var IQContact = db.客戶聯絡人.Include(客 => 客.客戶資料);
             IQContact = IQContact.Where(p => p.IsDeleted == false);
-            if (!string.IsNullOrEmpty(search))
+            if (!string.IsNullOrEmpty(search1))
             {
-                IQContact = IQContact.Where(p => p.姓名.Contains(search));
+                IQContact = IQContact.Where(p => p.姓名.Contains(search1));
             }
-            IQContact=IQContact.OrderByDescending(p => p.Id);
+            if (!string.IsNullOrEmpty(search2))
+            {
+                IQContact = IQContact.Where(p => p.職稱.Contains(search2));
+            }
+            IQContact =IQContact.OrderByDescending(p => p.Id);
             var result = IQContact.ToPagedList(currentPage, pageSize);
             return View(result);
         }

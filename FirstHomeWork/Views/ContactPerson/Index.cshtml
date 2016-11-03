@@ -14,8 +14,31 @@
     @Html.ActionLink("新增", "Create")
 </p>
 <form>
-    <input type="text" name="search" />
-    <input type="submit" name="submit" value="搜尋" />
+    <table>
+        <tr>
+            <td colspan="4"><p>搜尋條件</p></td>
+        </tr>
+        <tr>
+            <td>
+                姓名
+            </td>
+            <td>
+                <input type="text" name="search1" />
+            </td>
+            <td>職稱</td>
+            <td>
+                <input type="text" name="search2" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <p>
+                    <input type="submit" name="submit" value="搜尋" />
+                </p>
+            </td>
+        </tr>
+    </table>
+    
 </form>
 <table class="table">
     <tr>
