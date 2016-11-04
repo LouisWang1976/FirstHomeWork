@@ -232,6 +232,7 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\VTController.cs" />
     <Compile Include="Controllers\vw_CustomerDetailsCountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -340,15 +341,24 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="calendar.html" />
+    <Content Include="chart.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
+    <Content Include="file-manager.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="form.html" />
+    <Content Include="gallery.html" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="icon.html" />
+    <Content Include="index.html" />
+    <Content Include="login.html" />
+    <Content Include="messages.html" />
     <Content Include="Models\Customer.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Customer.edmx</DependentUpon>
@@ -372,6 +382,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="widgets.html" />
     <EntityDeploy Include="Models\Customer.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Customer.Designer.cs</LastGenOutput>
@@ -401,6 +412,13 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="submenu.html" />
+    <Content Include="submenu2.html" />
+    <Content Include="submenu3.html" />
+    <Content Include="table.html" />
+    <Content Include="tasks.html" />
+    <Content Include="typography.html" />
+    <Content Include="ui.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -458,10 +476,17 @@
     <Content Include="Views\vw_CustomerDetailsCount\Edit.cshtml" />
     <Content Include="Views\vw_CustomerDetailsCount\Index.cshtml" />
     <Content Include="Views\Customer\ExcelOutput.cshtml" />
+    <Content Include="Views\VT\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutBootstrap.cshtml" />
+    <Content Include="Views\VT\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\excel\Template\" />
     <Folder Include="App_Data\excel\TempOutput\" />
+    <Folder Include="css\" />
+    <Folder Include="font\" />
+    <Folder Include="img\" />
+    <Folder Include="js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
