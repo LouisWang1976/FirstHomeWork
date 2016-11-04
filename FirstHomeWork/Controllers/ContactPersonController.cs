@@ -21,12 +21,8 @@ namespace FirstHomeWork.Controllers
         public ActionResult Index(string search1, string search2,int page=1)
         {
             int currentPage = page < 1 ? 1 : page;
-            var IQContact = db.客戶聯絡人.Include(客 => 客.客戶資料);
-            IQContact = IQContact.Where(p => p.IsDeleted == false);
-
-            IQContact =IQContact.OrderByDescending(p => p.Id);
             var data = repo.GetAllDataOrderById(search1, search2, page);
-            var result = IQContact.ToPagedList(currentPage, pageSize);
+            var result = data.ToPagedList(currentPage, pageSize);
             return View(result);
         }
 
@@ -103,7 +99,10 @@ namespace FirstHomeWork.Controllers
             ViewBag.客戶Id = new SelectList(db.客戶資料, "Id", "客戶名稱", 客戶聯絡人.客戶Id);
             return View(客戶聯絡人);
         }
-
+        public ActionResult BatchEdit(int CustomerId)
+        {
+            return View();
+        }
         // GET: ContactPerson/Delete/5
         public ActionResult Delete(int? id)
         {

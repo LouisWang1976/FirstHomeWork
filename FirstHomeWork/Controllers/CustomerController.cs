@@ -21,6 +21,7 @@ namespace FirstHomeWork.Controllers
         private CustomerEntities db = new CustomerEntities();
         private int pageSize = 10;
         // GET: Customer
+        [HandleError(View = "ArgumentError", ExceptionType =typeof(ArgumentException))]
         public ActionResult Index(string search1,int? DPClass, int page = 1)
         {
             var options = ClassRepo.All().ToList();
