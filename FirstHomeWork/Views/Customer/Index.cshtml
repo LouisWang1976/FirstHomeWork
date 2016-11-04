@@ -30,14 +30,21 @@
             </td>
         </tr>
         <tr>
-            <td colspan="4">
+            <td colspan="3">
                 <p>
                     <input type="submit" name="submit" value="搜尋" />
+                </p>
+            </td>
+            <td >
+                <p>
+                    @Html.ActionLink("匯出Excel", "ExcelOutput")
+                    @*<input type="submit" name="" value="匯出Excel" src="@Url.Action("ExcelOutput", "Customer")" />*@
                 </p>
             </td>
         </tr>
     </table>
 </form>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
 <table class="table">
     <tr>
         <th>
@@ -90,4 +97,3 @@
 }
 
 </table>
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))

@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using FirstHomeWork.Models;
 using PagedList;
+using FirstHomeWork.Classes;
+using NPOI.HSSF.UserModel;
+using System.IO;
 
 namespace FirstHomeWork.Controllers
 {
@@ -125,7 +128,16 @@ namespace FirstHomeWork.Controllers
             repo.UnitOfWork.Commit();
             return RedirectToAction("Index");
         }
-
+        //[HttpPost]
+        public ActionResult ExcelOutput()
+        {
+            var repodata = repo.All();
+            var data = from s1 in repodata select new { s1.客戶名稱, s1.統一編號, s1.電話, s1.傳真, s1.地址, s1.Email };
+            var l_ExcelClass = new ExcelClass();
+            DataTable l_datatable = l_ExcelClass.ToDataTable(data);
+            string OutputPath = l_ExcelClass.ExcelOutput(l_datatable, "Customer");
+            return File(Server.MapPath(OutputPath), "application/vnd.ms-excel") ;
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

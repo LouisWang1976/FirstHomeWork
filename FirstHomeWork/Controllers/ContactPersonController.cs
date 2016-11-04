@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using FirstHomeWork.Models;
 using PagedList;
+using FirstHomeWork.Classes;
+
 namespace FirstHomeWork.Controllers
 {
     public class ContactPersonController : Controller
@@ -127,7 +129,15 @@ namespace FirstHomeWork.Controllers
             repo.UnitOfWork.Commit();
             return RedirectToAction("Index");
         }
-
+        public ActionResult ExcelOutput()
+        {
+            var repodata = repo.All();
+            var data = from s1 in repodata select new { s1.職稱, s1.姓名, s1.Email, s1.手機, s1.電話, s1.客戶資料.客戶名稱 };
+            var l_ExcelClass = new ExcelClass();
+            DataTable l_datatable = l_ExcelClass.ToDataTable(data);
+            string OutputPath = l_ExcelClass.ExcelOutput(l_datatable, " ContactPerson");
+            return File(Server.MapPath(OutputPath), "application/vnd.ms-excel");
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
